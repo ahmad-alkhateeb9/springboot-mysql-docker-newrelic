@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  java-test:
+    image: javatest
+    container_name: java-test-app
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    restart: always
+    depends_on:
+      - mysqldb
+  mysqldb:
+    image: ahmadoosh99/sql:v1
+    restart: always
+    container_name: mysql-first
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: javabase
+      MYSQL_USER: spring
+      MYSQL_PASSWORD: password
+
